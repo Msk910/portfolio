@@ -1,0 +1,624 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asaad Alshammakh | Software Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- To add your photo: save your image as profile.jpg in the same folder as this file -->
+  <style>
+    :root {
+      --navy:    #0d1b2e;
+      --navy2:   #132238;
+      --navy3:   #1a2f4a;
+      --accent:  #2563eb;
+      --accent2: #38bdf8;
+      --teal:    #0d9488;
+      --text:    #1e293b;
+      --text-lt: #475569;
+      --muted:   #94a3b8;
+      --border:  #e2e8f0;
+      --gradient: linear-gradient(135deg, #2563eb 0%, #38bdf8 100%);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Inter", sans-serif; background: #f1f5f9; color: var(--text); line-height: 1.6; overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--accent2); border-radius: 3px; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: rgba(13,27,46,0.92); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,0.07); height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 0 6%; }
+    .nav-logo { font-weight: 800; font-size: 1.1rem; color: #fff; }
+    .nav-logo span { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent2); }
+    .nav-cta { background: var(--gradient); color: #fff; border: none; border-radius: 8px; padding: 8px 20px; font-size: 0.83rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: opacity 0.2s, transform 0.2s; }
+    .nav-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    /* HERO */
+    #hero { background: var(--navy); padding: 120px 6% 80px; text-align: center; position: relative; overflow: hidden; }
+    #hero::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px); background-size: 50px 50px; pointer-events: none; }
+    #hero::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 55% 50% at 50% 0%,rgba(37,99,235,0.22) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 80% 80%,rgba(56,189,248,0.12) 0%,transparent 60%); pointer-events: none; }
+    .hero-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+    .personal-profile-label { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent2); background: rgba(56,189,248,0.12); border: 1px solid rgba(56,189,248,0.25); border-radius: 4px; padding: 4px 14px; margin-bottom: 28px; }
+    .hero-name { font-size: clamp(2.4rem,5.5vw,4rem); font-weight: 800; color: #fff; line-height: 1.1; margin-bottom: 20px; letter-spacing: -0.5px; }
+    .hero-subtitle { font-size: 1.05rem; color: rgba(255,255,255,0.6); max-width: 520px; margin: 0 auto 40px; line-height: 1.75; }
+    .hero-chips { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
+    .hero-chip { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 50px; padding: 7px 16px; font-size: 0.8rem; color: rgba(255,255,255,0.75); text-decoration: none; transition: background 0.2s, border-color 0.2s; }
+    .hero-chip:hover { background: rgba(37,99,235,0.25); border-color: var(--accent2); color: #fff; }
+
+    /* PROFILE CARD */
+    .profile-card-wrapper { background: var(--navy2); padding: 0 6% 70px; display: flex; justify-content: center; }
+    .profile-card { background: #fff; border-radius: 20px; padding: 44px 48px 48px; max-width: 700px; width: 100%; text-align: center; margin-top: -56px; position: relative; z-index: 10; box-shadow: 0 20px 60px rgba(0,0,0,0.18); }
+    .avatar-ring { width: 120px; height: 120px; border-radius: 50%; padding: 4px; background: var(--gradient); margin: 0 auto 22px; }
+    .avatar-ring img, .avatar-fallback { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; object-position: top center; display: block; }
+    .avatar-fallback { background: var(--navy3); display: flex; align-items: center; justify-content: center; font-size: 2.4rem; font-weight: 800; color: #fff; }
+    .profile-card h2 { font-size: 1.5rem; font-weight: 800; color: var(--text); margin-bottom: 14px; }
+    .profile-card p { font-size: 0.93rem; color: var(--text-lt); line-height: 1.8; max-width: 520px; margin: 0 auto 24px; }
+    .profile-card-btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+    .btn { padding: 11px 26px; border-radius: 9px; font-size: 0.88rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; display: inline-flex; align-items: center; gap: 7px; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--gradient); color: #fff; border: none; box-shadow: 0 4px 18px rgba(37,99,235,0.35); }
+    .btn-primary:hover { box-shadow: 0 6px 28px rgba(37,99,235,0.5); }
+    .btn-outline { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+    .btn-outline:hover { background: rgba(37,99,235,0.06); }
+
+    /* SECTIONS */
+    .page-body { background: #f1f5f9; }
+    section.content-section { padding: 72px 6%; }
+    section.content-section:nth-child(even) { background: #ffffff; }
+    .section-label { display: inline-block; font-family: "Fira Code",monospace; font-size: 0.72rem; font-weight: 600; letter-spacing: 1.5px; color: var(--accent); background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.2); border-radius: 4px; padding: 3px 10px; margin-bottom: 12px; }
+    .section-title { font-size: clamp(1.55rem,2.8vw,2.1rem); font-weight: 800; color: var(--text); margin-bottom: 8px; }
+    .section-title span { color: var(--accent); }
+    .section-desc { font-size: 0.93rem; color: var(--text-lt); margin-bottom: 44px; max-width: 520px; }
+
+    /* PROJECTS */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(340px,1fr)); gap: 26px; }
+
+    /* Card shell */
+    .project-card { background: #fff; border: 1px solid var(--border); border-radius: 18px; display: flex; flex-direction: column; overflow: hidden; transition: transform 0.25s,box-shadow 0.25s,border-color 0.25s; }
+    .project-card:hover { transform: translateY(-5px); box-shadow: 0 14px 40px rgba(37,99,235,0.12); border-color: rgba(37,99,235,0.3); }
+
+    /* Carousel */
+    .proj-carousel { position: relative; width: 100%; height: 200px; background: #e8edf5; overflow: hidden; flex-shrink: 0; }
+    .proj-slides { display: flex; height: 100%; transition: transform 0.35s ease; }
+    .proj-slide { min-width: 100%; height: 100%; }
+    .proj-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .proj-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(135deg,#e8edf5 0%,#dde4f0 100%); }
+    .proj-placeholder .ph-icon { font-size: 2.8rem; }
+    .proj-placeholder .ph-label { font-size: 0.72rem; color: var(--muted); font-family: "Fira Code",monospace; letter-spacing: 1px; }
+    /* Arrows */
+    .proj-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: background 0.2s,transform 0.2s; z-index: 5; }
+    .proj-arrow:hover { background: #fff; transform: translateY(-50%) scale(1.1); }
+    .proj-prev { left: 10px; }
+    .proj-next { right: 10px; }
+    .proj-arrow.hidden { display: none; }
+    /* Dots */
+    .proj-dots { position: absolute; bottom: 9px; left: 50%; transform: translateX(-50%); display: flex; gap: 5px; }
+    .proj-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; transition: background 0.2s,transform 0.2s; border: none; padding: 0; }
+    .proj-dot.active { background: #fff; transform: scale(1.25); }
+    /* Image counter badge */
+    .proj-counter { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.45); color: #fff; font-size: 0.68rem; font-family: "Fira Code",monospace; padding: 3px 8px; border-radius: 20px; }
+
+    /* Card body */
+    .proj-body { padding: 22px 22px 20px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+    .project-top { display: flex; justify-content: space-between; align-items: flex-start; }
+    .project-icon { width: 40px; height: 40px; background: rgba(37,99,235,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    .project-date { font-size: 0.7rem; color: var(--muted); font-family: "Fira Code",monospace; background: #f1f5f9; padding: 3px 8px; border-radius: 4px; white-space: nowrap; }
+    .project-name { font-size: 1rem; font-weight: 700; color: var(--text); line-height: 1.35; }
+    .project-desc { font-size: 0.84rem; color: var(--text-lt); line-height: 1.72; flex: 1; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+    .tag { font-size: 0.7rem; padding: 3px 9px; border-radius: 20px; font-weight: 600; font-family: "Fira Code",monospace; }
+    .tag-blue   { background: rgba(37,99,235,0.1);  color: #2563eb; border: 1px solid rgba(37,99,235,0.2); }
+    .tag-cyan   { background: rgba(56,189,248,0.1); color: #0284c7; border: 1px solid rgba(56,189,248,0.25); }
+    .tag-green  { background: rgba(13,148,136,0.1); color: #0d9488; border: 1px solid rgba(13,148,136,0.2); }
+    .tag-orange { background: rgba(234,88,12,0.1);  color: #ea580c; border: 1px solid rgba(234,88,12,0.2); }
+    .tag-pink   { background: rgba(219,39,119,0.1); color: #db2777; border: 1px solid rgba(219,39,119,0.2); }
+    .tag-indigo { background: rgba(99,102,241,0.1); color: #6366f1; border: 1px solid rgba(99,102,241,0.2); }
+
+    /* SKILLS */
+    .skills-wrapper { display: grid; grid-template-columns: repeat(auto-fill,minmax(270px,1fr)); gap: 20px; }
+    .skill-group { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 24px; transition: border-color 0.2s,box-shadow 0.2s; }
+    .skill-group:hover { border-color: rgba(37,99,235,0.3); box-shadow: 0 4px 18px rgba(37,99,235,0.08); }
+    .skill-group-title { font-size: 0.8rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-pill { font-size: 0.78rem; padding: 4px 12px; background: #f1f5f9; border: 1px solid var(--border); border-radius: 20px; color: var(--text); font-weight: 500; transition: background 0.2s,border-color 0.2s,color 0.2s; }
+    .skill-pill:hover { background: rgba(37,99,235,0.08); border-color: var(--accent); color: var(--accent); }
+
+    /* EDUCATION */
+    .edu-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 32px 36px; max-width: 680px; display: flex; gap: 26px; align-items: flex-start; box-shadow: 0 2px 12px rgba(0,0,0,0.05); transition: box-shadow 0.2s,border-color 0.2s; }
+    .edu-card:hover { box-shadow: 0 8px 28px rgba(37,99,235,0.1); border-color: rgba(37,99,235,0.3); }
+    .edu-icon { font-size: 2.2rem; flex-shrink: 0; }
+    .edu-uni { font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .edu-degree { font-size: 0.9rem; color: var(--text-lt); margin-bottom: 12px; }
+    .edu-gpa { display: inline-flex; align-items: center; gap: 6px; background: rgba(13,148,136,0.1); border: 1px solid rgba(13,148,136,0.25); border-radius: 6px; padding: 4px 12px; font-size: 0.8rem; color: var(--teal); font-weight: 700; }
+
+    /* CERTIFICATIONS */
+    .certs-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(290px,1fr)); gap: 16px; }
+    .cert-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; display: flex; align-items: center; gap: 14px; transition: border-color 0.2s,transform 0.2s; }
+    .cert-card:hover { border-color: var(--accent); transform: translateX(4px); }
+    .cert-icon { font-size: 1.4rem; width: 40px; height: 40px; background: rgba(37,99,235,0.08); border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .cert-name { font-size: 0.86rem; font-weight: 600; color: var(--text); line-height: 1.4; }
+
+    /* CONTACT */
+    #contact { background: var(--navy) !important; }
+    #contact .section-label { color: var(--accent2); background: rgba(56,189,248,0.1); border-color: rgba(56,189,248,0.25); }
+    #contact .section-title { color: #fff; }
+    #contact .section-title span { color: var(--accent2); }
+    #contact .section-desc { color: rgba(255,255,255,0.55); }
+    .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .contact-links { display: flex; flex-direction: column; gap: 13px; }
+    .contact-link-row { display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px 18px; text-decoration: none; color: #fff; transition: border-color 0.2s,transform 0.2s,background 0.2s; }
+    .contact-link-row:hover { border-color: var(--accent2); background: rgba(56,189,248,0.08); transform: translateX(4px); }
+    .contact-link-icon { font-size: 1.2rem; width: 38px; height: 38px; background: rgba(255,255,255,0.08); border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .contact-link-label { font-size: 0.73rem; color: rgba(255,255,255,0.45); }
+    .contact-link-value { font-size: 0.88rem; font-weight: 600; }
+    .contact-deco { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; min-height: 280px; text-align: center; }
+    .deco-avatar { width: 72px; height: 72px; border-radius: 50%; background: var(--gradient); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; font-weight: 800; color: #fff; margin-bottom: 6px; }
+    .deco-city { font-size: 1.2rem; font-weight: 700; color: #fff; }
+    .deco-country { font-size: 0.85rem; color: rgba(255,255,255,0.5); }
+    .deco-note { font-size: 0.82rem; color: rgba(255,255,255,0.45); line-height: 1.7; margin-top: 8px; }
+
+    /* FOOTER */
+    footer { background: #080f1c; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; padding: 24px 6%; font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+    footer span { color: var(--accent2); font-weight: 600; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 0 4%; }
+      .nav-links { display: none; }
+      .profile-card { padding: 32px 24px 36px; margin-top: -40px; }
+      .contact-wrapper { grid-template-columns: 1fr; }
+      .contact-deco { display: none; }
+      section.content-section { padding: 56px 5%; }
+      #hero { padding: 90px 5% 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Asaad <span>Alshammakh</span></div>
+  <ul class="nav-links">
+    <li><a href="#about-section">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:assd1234305@gmail.com" class="nav-cta">Hire Me</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-inner">
+    <div class="personal-profile-label">Personal Profile</div>
+    <h1 class="hero-name">Asaad Abdullah<br/>Alshammakh</h1>
+    <p class="hero-subtitle">
+      Software Engineer passionate about AI, data science, and building<br/>
+      scalable, reliable web applications.
+    </p>
+    <div class="hero-chips">
+      <a href="mailto:assd1234305@gmail.com" class="hero-chip">&#9993;&#65039; assd1234305@gmail.com</a>
+      <a href="https://www.linkedin.com/in/asaad-al-shammakh-100765280/" target="_blank" class="hero-chip">&#128279; LinkedIn</a>
+      <span class="hero-chip">&#128205; Riyadh, Saudi Arabia</span>
+      <span class="hero-chip">&#128222; +966 508 705 727</span>
+    </div>
+  </div>
+</section>
+
+<div class="profile-card-wrapper" id="about-section">
+  <div class="profile-card">
+    <div class="avatar-ring">
+      <img src="profile.jpg" alt="Asaad Alshammakh"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+      <div class="avatar-fallback" style="display:none;">AA</div>
+    </div>
+    <h2>About Me</h2>
+    <p>
+      Software engineer with a strong interest in AI and data science, with hands-on experience in
+      web development, machine learning, and data analysis. Proficient in building reliable, scalable
+      solutions using Python, Java, C, SQL, and web technologies (HTML, CSS, JavaScript, PHP), as
+      well as Flutter and Laravel. Seeking an opportunity to apply and further develop technical
+      skills in a professional environment.
+    </p>
+    <div class="profile-card-btns">
+      <a href="#projects" class="btn btn-primary">View My Projects &#8595;</a>
+      <a href="mailto:assd1234305@gmail.com" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </div>
+</div>
+
+<div class="page-body">
+
+  <!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║              HOW TO ADD PROJECT PHOTOS                       ║
+  ║                                                              ║
+  ║  1. Open the  project-images/  folder (same folder as this  ║
+  ║     HTML file).                                              ║
+  ║                                                              ║
+  ║  2. Save screenshots using these exact names:               ║
+  ║     opticourse-1.jpg  opticourse-2.jpg  opticourse-3.jpg    ║
+  ║     rapidprint-1.jpg  rapidprint-2.jpg  ...                  ║
+  ║     ann-1.jpg                                               ║
+  ║     fyp-1.jpg         fyp-2.jpg                             ║
+  ║     workshop-1.jpg    workshop-2.jpg                        ║
+  ║     educloud-1.jpg    educloud-2.jpg                        ║
+  ║                                                              ║
+  ║  3. Refresh the browser — photos appear automatically.      ║
+  ║     You can add as many numbered files as you like.         ║
+  ╚══════════════════════════════════════════════════════════════╝
+  -->
+  <section class="content-section" id="projects">
+    <div class="section-label">// projects</div>
+    <h2 class="section-title">Featured <span>Projects</span></h2>
+    <p class="section-desc">Real-world applications I have designed and built from scratch.</p>
+    <div class="projects-grid">
+
+      <!-- OptiCourse -->
+      <div class="project-card">
+        <div class="proj-carousel" data-prefix="project-images/opticourse" data-icon="&#129302;">
+          <div class="proj-slides"></div>
+          <button class="proj-arrow proj-prev">&#8249;</button>
+          <button class="proj-arrow proj-next">&#8250;</button>
+          <div class="proj-dots"></div>
+          <div class="proj-counter"></div>
+        </div>
+        <div class="proj-body">
+          <div class="project-top">
+            <div class="project-icon">&#129302;</div>
+            <div class="project-date">Sep - Dec 2025</div>
+          </div>
+          <div class="project-name">OptiCourse - AI Course Registration System</div>
+          <p class="project-desc">AI-powered course registration system using Constraint Satisfaction Problem (CSP) technique to optimize student scheduling and prevent conflicts. Includes user authentication and backend APIs.</p>
+          <div class="project-tags">
+            <span class="tag tag-blue">Python</span>
+            <span class="tag tag-cyan">Flask</span>
+            <span class="tag tag-orange">Firebase</span>
+            <span class="tag tag-green">CSP / AI</span>
+            <span class="tag tag-indigo">Firestore</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RapidPrint -->
+      <div class="project-card">
+        <div class="proj-carousel" data-prefix="project-images/rapidprint" data-icon="&#128424;">
+          <div class="proj-slides"></div>
+          <button class="proj-arrow proj-prev">&#8249;</button>
+          <button class="proj-arrow proj-next">&#8250;</button>
+          <div class="proj-dots"></div>
+          <div class="proj-counter"></div>
+        </div>
+        <div class="proj-body">
+          <div class="project-top">
+            <div class="project-icon">&#128424;</div>
+            <div class="project-date">Jul - Nov 2024</div>
+          </div>
+          <div class="project-name">RapidPrint - Campus Printing Management System</div>
+          <p class="project-desc">Web-based printing system with QR code membership, automated invoicing, and an admin analytics dashboard (Chart.js + DataTables) for multi-branch inventory management.</p>
+          <div class="project-tags">
+            <span class="tag tag-orange">PHP</span>
+            <span class="tag tag-blue">MySQL</span>
+            <span class="tag tag-green">Chart.js</span>
+            <span class="tag tag-indigo">DataTables</span>
+            <span class="tag tag-pink">QR Code</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANN -->
+      <div class="project-card">
+        <div class="proj-carousel" data-prefix="project-images/ann" data-icon="&#127916;">
+          <div class="proj-slides"></div>
+          <button class="proj-arrow proj-prev">&#8249;</button>
+          <button class="proj-arrow proj-next">&#8250;</button>
+          <div class="proj-dots"></div>
+          <div class="proj-counter"></div>
+        </div>
+        <div class="proj-body">
+          <div class="project-top">
+            <div class="project-icon">&#127916;</div>
+            <div class="project-date">2025</div>
+          </div>
+          <div class="project-name">ANN: Netflix Movie Recommendation System</div>
+          <p class="project-desc">Artificial Neural Network model for movie recommendations trained on Netflix data, using fuzzy logic and scientific computing for enhanced prediction accuracy.</p>
+          <div class="project-tags">
+            <span class="tag tag-blue">Python</span>
+            <span class="tag tag-cyan">NumPy</span>
+            <span class="tag tag-green">SciPy</span>
+            <span class="tag tag-pink">scikit-fuzzy</span>
+            <span class="tag tag-orange">ANN</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FYP -->
+      <div class="project-card">
+        <div class="proj-carousel" data-prefix="project-images/fyp" data-icon="&#127891;">
+          <div class="proj-slides"></div>
+          <button class="proj-arrow proj-prev">&#8249;</button>
+          <button class="proj-arrow proj-next">&#8250;</button>
+          <div class="proj-dots"></div>
+          <div class="proj-counter"></div>
+        </div>
+        <div class="proj-body">
+          <div class="project-top">
+            <div class="project-icon">&#127891;</div>
+            <div class="project-date">Aug - Nov 2023</div>
+          </div>
+          <div class="project-name">FYP Supervisor Hunting System</div>
+          <p class="project-desc">Laravel MVC-based system handling supervisor selection, appointment scheduling, and quota management, with complete SDD documentation and notification workflows.</p>
+          <div class="project-tags">
+            <span class="tag tag-orange">Laravel</span>
+            <span class="tag tag-blue">PHP</span>
+            <span class="tag tag-cyan">MySQL</span>
+            <span class="tag tag-green">Blade</span>
+            <span class="tag tag-pink">MVC</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Workshop -->
+      <div class="project-card">
+        <div class="proj-carousel" data-prefix="project-images/workshop" data-icon="&#128295;">
+          <div class="proj-slides"></div>
+          <button class="proj-arrow proj-prev">&#8249;</button>
+          <button class="proj-arrow proj-next">&#8250;</button>
+          <div class="proj-dots"></div>
+          <div class="proj-counter"></div>
+        </div>
+        <div class="proj-body">
+          <div class="project-top">
+            <div class="project-icon">&#128295;</div>
+            <div class="project-date">Jan - Mar 2024</div>
+          </div>
+          <div class="project-name">Workshop Management System</div>
+          <p class="project-desc">Cross-platform mobile app evolving an existing system to a live online platform with real-time data synchronization via Firebase integration.</p>
+          <div class="project-tags">
+            <span class="tag tag-blue">Flutter</span>
+            <span class="tag tag-indigo">Dart</span>
+            <span class="tag tag-orange">Firebase</span>
+            <span class="tag tag-green">GitHub</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- EduCloud -->
+      <div class="project-card">
+        <div class="proj-carousel" data-prefix="project-images/educloud" data-icon="&#9729;">
+          <div class="proj-slides"></div>
+          <button class="proj-arrow proj-prev">&#8249;</button>
+          <button class="proj-arrow proj-next">&#8250;</button>
+          <div class="proj-dots"></div>
+          <div class="proj-counter"></div>
+        </div>
+        <div class="proj-body">
+          <div class="project-top">
+            <div class="project-icon">&#9729;</div>
+            <div class="project-date">Aug - Oct 2025</div>
+          </div>
+          <div class="project-name">EduCloud LMS - Energy Efficiency Management</div>
+          <p class="project-desc">Cloud-based LMS deployed on Google Cloud Platform using Cloud Run (PaaS) and Cloud Firestore (NoSQL) with Firebase Authentication and role-based access control.</p>
+          <div class="project-tags">
+            <span class="tag tag-blue">GCP</span>
+            <span class="tag tag-cyan">Cloud Run</span>
+            <span class="tag tag-green">Firestore</span>
+            <span class="tag tag-indigo">Firebase Auth</span>
+            <span class="tag tag-pink">RBAC</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="content-section" id="skills">
+    <div class="section-label">// skills</div>
+    <h2 class="section-title">Technical <span>Skills</span></h2>
+    <p class="section-desc">Technologies and tools I work with on a regular basis.</p>
+    <div class="skills-wrapper">
+      <div class="skill-group">
+        <div class="skill-group-title">&#9000;&#65039; Programming Languages</div>
+        <div class="skill-pills"><span class="skill-pill">Python</span><span class="skill-pill">Java</span><span class="skill-pill">C</span><span class="skill-pill">JavaScript</span><span class="skill-pill">PHP</span><span class="skill-pill">Dart</span><span class="skill-pill">SQL</span><span class="skill-pill">HTML &amp; CSS</span></div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">&#128736;&#65039; Frameworks &amp; Platforms</div>
+        <div class="skill-pills"><span class="skill-pill">Laravel</span><span class="skill-pill">Flask</span><span class="skill-pill">FastAPI</span><span class="skill-pill">Flutter</span><span class="skill-pill">Firebase</span><span class="skill-pill">MySQL</span></div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">&#9729;&#65039; Cloud &amp; DevOps</div>
+        <div class="skill-pills"><span class="skill-pill">Google Cloud Platform</span><span class="skill-pill">Cloud Run</span><span class="skill-pill">Cloud Firestore</span><span class="skill-pill">Firebase Auth</span><span class="skill-pill">GitHub</span></div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">&#129302; AI &amp; Data</div>
+        <div class="skill-pills"><span class="skill-pill">Machine Learning</span><span class="skill-pill">ANN</span><span class="skill-pill">CSP Algorithms</span><span class="skill-pill">NumPy</span><span class="skill-pill">SciPy</span><span class="skill-pill">scikit-fuzzy</span><span class="skill-pill">Power BI</span></div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">&#128295; Dev Tools</div>
+        <div class="skill-pills"><span class="skill-pill">VS Code</span><span class="skill-pill">NetBeans</span><span class="skill-pill">CodeBlocks</span><span class="skill-pill">Excel</span><span class="skill-pill">Google Script</span></div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">&#129309; Soft Skills</div>
+        <div class="skill-pills"><span class="skill-pill">Leadership</span><span class="skill-pill">Teamwork</span><span class="skill-pill">Problem Solving</span><span class="skill-pill">Analytical Thinking</span><span class="skill-pill">Technical Writing</span><span class="skill-pill">Adaptability</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section" id="education">
+    <div class="section-label">// education</div>
+    <h2 class="section-title">My <span>Education</span></h2>
+    <p class="section-desc">Academic background that formed my technical foundation.</p>
+    <div class="edu-card">
+      <div class="edu-icon">&#127891;</div>
+      <div>
+        <div class="edu-uni">University Malaysia Pahang al-Sultan Abdullah</div>
+        <div class="edu-degree">Bachelor of Computer Science - Software Engineering with Honors</div>
+        <div class="edu-gpa">&#11088; GPA: 3.2 / 4.0</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section" id="certifications">
+    <div class="section-label">// certifications</div>
+    <h2 class="section-title">Certifications &amp; <span>Courses</span></h2>
+    <p class="section-desc">Professional certifications and continuous learning achievements.</p>
+    <div class="certs-grid">
+      <div class="cert-card"><div class="cert-icon">&#127760;</div><div class="cert-name">Huawei ICT Academy - HCIA-AI V4.0 Course</div></div>
+      <div class="cert-card"><div class="cert-icon">&#128309;</div><div class="cert-name">Cisco Networking Academy - CCNAv7</div></div>
+      <div class="cert-card"><div class="cert-icon">&#129302;</div><div class="cert-name">Mastery Academy - Artificial Intelligence</div></div>
+      <div class="cert-card"><div class="cert-icon">&#9729;&#65039;</div><div class="cert-name">RunCloud Education - Fundamentals of Cloud Computing</div></div>
+      <div class="cert-card"><div class="cert-icon">&#128202;</div><div class="cert-name">Empowering Graduates with Microsoft Power BI</div></div>
+      <div class="cert-card"><div class="cert-icon">&#127757;</div><div class="cert-name">IELTS Academic</div></div>
+    </div>
+  </section>
+
+  <section class="content-section" id="contact">
+    <div class="section-label">// contact</div>
+    <h2 class="section-title">Get In <span>Touch</span></h2>
+    <p class="section-desc">Open to internship and full-time opportunities - let us connect!</p>
+    <div class="contact-wrapper">
+      <div class="contact-links">
+        <a href="mailto:assd1234305@gmail.com" class="contact-link-row">
+          <div class="contact-link-icon">&#9993;&#65039;</div>
+          <div><div class="contact-link-label">Email</div><div class="contact-link-value">assd1234305@gmail.com</div></div>
+        </a>
+        <a href="https://www.linkedin.com/in/asaad-al-shammakh-100765280/" target="_blank" class="contact-link-row">
+          <div class="contact-link-icon">&#128279;</div>
+          <div><div class="contact-link-label">LinkedIn</div><div class="contact-link-value">asaad-al-shammakh-100765280</div></div>
+        </a>
+        <span class="contact-link-row">
+          <div class="contact-link-icon">&#128222;</div>
+          <div><div class="contact-link-label">Phone - Saudi Arabia</div><div class="contact-link-value">+966 508 705 727</div></div>
+        </span>
+        <span class="contact-link-row">
+          <div class="contact-link-icon">&#128241;</div>
+          <div><div class="contact-link-label">Phone - Malaysia</div><div class="contact-link-value">+60 146 928 837</div></div>
+        </span>
+      </div>
+      <div class="contact-deco">
+        <div class="deco-avatar">AA</div>
+        <div class="deco-city">Riyadh</div>
+        <div class="deco-country">Saudi Arabia</div>
+        <div class="deco-note">Open to remote &amp; on-site opportunities<br/>Internship &bull; Full-time &bull; Freelance</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p>Designed &amp; built by <span>Asaad Abdullah Alshammakh</span> &mdash; &copy; 2026. All rights reserved.</p>
+</footer>
+
+<script>
+// ── Project Image Carousel Engine ──────────────────────────────────────────
+// For each .proj-carousel, probes for images named:  {prefix}-1.jpg/png/webp,
+// {prefix}-2.jpg/png/webp, ... up to 10.  Shows a placeholder if none found.
+(function () {
+  const EXTS = ['jpg', 'jpeg', 'png', 'webp'];
+  const MAX  = 10;
+
+  function probeImages(prefix, callback) {
+    let found = [], pending = 0, checked = 0;
+    const total = MAX * EXTS.length;
+    for (let i = 1; i <= MAX; i++) {
+      for (const ext of EXTS) {
+        const src = prefix + '-' + i + '.' + ext;
+        const img = new Image();
+        (function(idx, s) {
+          img.onload  = function() { found[idx] = s; check(); };
+          img.onerror = function() { check(); };
+        })(i, src);
+        img.src = src;
+      }
+    }
+    function check() {
+      checked++;
+      if (checked === total) {
+        callback(found.filter(Boolean));
+      }
+    }
+  }
+
+  function buildCarousel(el, images, iconHtml) {
+    const slidesEl  = el.querySelector('.proj-slides');
+    const dotsEl    = el.querySelector('.proj-dots');
+    const counterEl = el.querySelector('.proj-counter');
+    const prevBtn   = el.querySelector('.proj-prev');
+    const nextBtn   = el.querySelector('.proj-next');
+    let current = 0;
+
+    if (!images.length) {
+      // No images — show placeholder
+      slidesEl.innerHTML = '';
+      const ph = document.createElement('div');
+      ph.className = 'proj-placeholder';
+      ph.innerHTML = '<div class="ph-icon">' + iconHtml + '</div><div class="ph-label">add photos &rarr; project-images/</div>';
+      el.insertBefore(ph, slidesEl);
+      el.removeChild(slidesEl);
+      prevBtn.remove(); nextBtn.remove();
+      dotsEl.remove(); counterEl.remove();
+      return;
+    }
+
+    // Build slides
+    images.forEach(function(src) {
+      const slide = document.createElement('div');
+      slide.className = 'proj-slide';
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = 'Project screenshot';
+      img.loading = 'lazy';
+      slide.appendChild(img);
+      slidesEl.appendChild(slide);
+    });
+
+    // Build dots
+    images.forEach(function(_, i) {
+      const dot = document.createElement('button');
+      dot.className = 'proj-dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', function() { goTo(i); });
+      dotsEl.appendChild(dot);
+    });
+
+    function update() {
+      slidesEl.style.transform = 'translateX(-' + (current * 100) + '%)';
+      dotsEl.querySelectorAll('.proj-dot').forEach(function(d, i) {
+        d.classList.toggle('active', i === current);
+      });
+      counterEl.textContent = (current + 1) + ' / ' + images.length;
+      prevBtn.classList.toggle('hidden', current === 0);
+      nextBtn.classList.toggle('hidden', current === images.length - 1);
+    }
+
+    function goTo(n) { current = n; update(); }
+
+    prevBtn.addEventListener('click', function() { if (current > 0) goTo(current - 1); });
+    nextBtn.addEventListener('click', function() { if (current < images.length - 1) goTo(current + 1); });
+
+    // Hide single-image controls
+    if (images.length === 1) {
+      prevBtn.remove(); nextBtn.remove(); dotsEl.remove(); counterEl.remove();
+    } else {
+      update();
+    }
+  }
+
+  document.querySelectorAll('.proj-carousel').forEach(function(el) {
+    const prefix = el.getAttribute('data-prefix');
+    const icon   = el.getAttribute('data-icon') || '&#128444;';
+    probeImages(prefix, function(images) {
+      buildCarousel(el, images, icon);
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
