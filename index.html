@@ -103,6 +103,28 @@
     .proj-dot.active { background: #fff; transform: scale(1.25); }
     /* Image counter badge */
     .proj-counter { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.45); color: #fff; font-size: 0.68rem; font-family: "Fira Code",monospace; padding: 3px 8px; border-radius: 20px; }
+    /* Clickable images */
+    .proj-slide img { cursor: zoom-in; }
+    .proj-carousel:hover .proj-zoom-hint { opacity: 1; }
+    .proj-zoom-hint { position: absolute; bottom: 36px; right: 10px; background: rgba(0,0,0,0.5); color: #fff; font-size: 0.65rem; padding: 3px 8px; border-radius: 4px; opacity: 0; transition: opacity 0.2s; pointer-events: none; }
+
+    /* Placeholder upload button */
+    .proj-placeholder .ph-upload { margin-top: 6px; display: inline-flex; align-items: center; gap: 6px; background: rgba(37,99,235,0.12); border: 1px dashed rgba(37,99,235,0.4); border-radius: 8px; padding: 7px 14px; font-size: 0.75rem; color: var(--accent); font-weight: 600; cursor: pointer; text-decoration: none; transition: background 0.2s, border-color 0.2s; }
+    .proj-placeholder .ph-upload:hover { background: rgba(37,99,235,0.2); border-color: var(--accent); }
+
+    /* ── LIGHTBOX ── */
+    #lightbox { display: none; position: fixed; inset: 0; z-index: 999; background: rgba(0,0,0,0.92); align-items: center; justify-content: center; flex-direction: column; }
+    #lightbox.open { display: flex; }
+    #lightbox img { max-width: 90vw; max-height: 82vh; border-radius: 8px; object-fit: contain; box-shadow: 0 8px 60px rgba(0,0,0,0.6); user-select: none; }
+    .lb-close { position: absolute; top: 18px; right: 22px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 1.5rem; width: 42px; height: 42px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+    .lb-close:hover { background: rgba(255,255,255,0.22); }
+    .lb-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 2rem; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+    .lb-arrow:hover { background: rgba(255,255,255,0.22); }
+    .lb-prev { left: 18px; }
+    .lb-next { right: 18px; }
+    .lb-arrow.hidden { opacity: 0.2; pointer-events: none; }
+    .lb-counter { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.6); font-size: 0.82rem; font-family: "Fira Code",monospace; }
+    .lb-caption { color: rgba(255,255,255,0.75); font-size: 0.85rem; margin-top: 14px; text-align: center; max-width: 600px; }
 
     /* Card body */
     .proj-body { padding: 22px 22px 20px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
@@ -512,6 +534,16 @@
 
 </div>
 
+<!-- ── LIGHTBOX ── -->
+<div id="lightbox" role="dialog" aria-modal="true">
+  <button class="lb-close" id="lb-close" title="Close">&#10005;</button>
+  <button class="lb-arrow lb-prev hidden" id="lb-prev">&#8249;</button>
+  <img id="lb-img" src="" alt="Project screenshot" />
+  <div class="lb-caption" id="lb-caption"></div>
+  <button class="lb-arrow lb-next hidden" id="lb-next">&#8250;</button>
+  <div class="lb-counter" id="lb-counter"></div>
+</div>
+
 <footer>
   <p>Designed &amp; built by <span>Asaad Abdullah Alshammakh</span> &mdash; &copy; 2026. All rights reserved.</p>
 </footer>
@@ -555,11 +587,16 @@
     let current = 0;
 
     if (!images.length) {
-      // No images — show placeholder
+      // No images — show placeholder with GitHub upload link
       slidesEl.innerHTML = '';
+      const folder = prefix.replace('project-images/', '');
+      const uploadUrl = 'https://github.com/Msk910/portfolio/upload/main/project-images';
       const ph = document.createElement('div');
       ph.className = 'proj-placeholder';
-      ph.innerHTML = '<div class="ph-icon">' + iconHtml + '</div><div class="ph-label">add photos &rarr; project-images/</div>';
+      ph.innerHTML =
+        '<div class="ph-icon">' + iconHtml + '</div>' +
+        '<div class="ph-label">No screenshots yet</div>' +
+        '<a class="ph-upload" href="' + uploadUrl + '" target="_blank">&#128247; Upload Photos on GitHub</a>';
       el.insertBefore(ph, slidesEl);
       el.removeChild(slidesEl);
       prevBtn.remove(); nextBtn.remove();
@@ -567,14 +604,21 @@
       return;
     }
 
+    // Add zoom hint
+    const hint = document.createElement('div');
+    hint.className = 'proj-zoom-hint';
+    hint.textContent = '🔍 click to enlarge';
+    el.appendChild(hint);
+
     // Build slides
-    images.forEach(function(src) {
+    images.forEach(function(src, idx) {
       const slide = document.createElement('div');
       slide.className = 'proj-slide';
       const img = document.createElement('img');
       img.src = src;
       img.alt = 'Project screenshot';
       img.loading = 'lazy';
+      img.addEventListener('click', function() { openLightbox(images, idx); });
       slide.appendChild(img);
       slidesEl.appendChild(slide);
     });
@@ -616,6 +660,56 @@
     probeImages(prefix, function(images) {
       buildCarousel(el, images, icon);
     });
+  });
+})();
+
+// ── Lightbox ────────────────────────────────────────────────────────────────
+(function () {
+  var lb       = document.getElementById('lightbox');
+  var lbImg    = document.getElementById('lb-img');
+  var lbClose  = document.getElementById('lb-close');
+  var lbPrev   = document.getElementById('lb-prev');
+  var lbNext   = document.getElementById('lb-next');
+  var lbCount  = document.getElementById('lb-counter');
+  var lbCap    = document.getElementById('lb-caption');
+
+  var _images  = [];
+  var _idx     = 0;
+
+  function openLightbox(images, startIdx) {
+    _images = images;
+    _idx    = startIdx;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    render();
+  }
+  window.openLightbox = openLightbox;
+
+  function render() {
+    lbImg.src = _images[_idx];
+    lbCount.textContent = (_idx + 1) + ' / ' + _images.length;
+    lbCap.textContent   = 'Image ' + (_idx + 1) + ' of ' + _images.length;
+    lbPrev.classList.toggle('hidden', _idx === 0);
+    lbNext.classList.toggle('hidden', _idx === _images.length - 1);
+  }
+
+  function close() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+    lbImg.src = '';
+  }
+
+  lbClose.addEventListener('click', close);
+  lb.addEventListener('click', function(e) { if (e.target === lb) close(); });
+
+  lbPrev.addEventListener('click', function() { if (_idx > 0) { _idx--; render(); } });
+  lbNext.addEventListener('click', function() { if (_idx < _images.length - 1) { _idx++; render(); } });
+
+  document.addEventListener('keydown', function(e) {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape')     close();
+    if (e.key === 'ArrowLeft')  { if (_idx > 0)                  { _idx--; render(); } }
+    if (e.key === 'ArrowRight') { if (_idx < _images.length - 1) { _idx++; render(); } }
   });
 })();
 </script>
