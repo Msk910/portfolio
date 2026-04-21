@@ -91,6 +91,8 @@
     .proj-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(135deg,#e8edf5 0%,#dde4f0 100%); }
     .proj-placeholder .ph-icon { font-size: 2.8rem; }
     .proj-placeholder .ph-label { font-size: 0.72rem; color: var(--muted); font-family: "Fira Code",monospace; letter-spacing: 1px; }
+    .proj-placeholder .ph-name-hint { font-size: 0.7rem; color: var(--text-lt); text-align: center; line-height: 1.8; }
+    .proj-placeholder .ph-name-hint code { background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.2); border-radius: 4px; padding: 1px 5px; font-family: "Fira Code",monospace; font-size: 0.68rem; color: var(--accent); }
     /* Arrows */
     .proj-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: background 0.2s,transform 0.2s; z-index: 5; }
     .proj-arrow:hover { background: #fff; transform: translateY(-50%) scale(1.1); }
@@ -587,7 +589,7 @@
     let current = 0;
 
     if (!images.length) {
-      // No images — show placeholder with GitHub upload link
+      // No images — show placeholder with GitHub upload link and exact filename hint
       slidesEl.innerHTML = '';
       const folder = prefix.replace('project-images/', '');
       const uploadUrl = 'https://github.com/Msk910/portfolio/upload/main/project-images';
@@ -596,7 +598,8 @@
       ph.innerHTML =
         '<div class="ph-icon">' + iconHtml + '</div>' +
         '<div class="ph-label">No screenshots yet</div>' +
-        '<a class="ph-upload" href="' + uploadUrl + '" target="_blank">&#128247; Upload Photos on GitHub</a>';
+        '<div class="ph-name-hint">Name your files:<br/><code>' + folder + '-1.png</code>, <code>' + folder + '-2.png</code> …</div>' +
+        '<a class="ph-upload" href="' + uploadUrl + '" target="_blank">&#128247; Upload to GitHub</a>';
       el.insertBefore(ph, slidesEl);
       el.removeChild(slidesEl);
       prevBtn.remove(); nextBtn.remove();
