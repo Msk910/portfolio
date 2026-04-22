@@ -104,7 +104,7 @@
     .proj-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; transition: background 0.2s,transform 0.2s; border: none; padding: 0; }
     .proj-dot.active { background: #fff; transform: scale(1.25); }
     /* Image counter badge */
-    .proj-counter { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.45); color: #fff; font-size: 0.68rem; font-family: "Fira Code",monospace; padding: 3px 8px; border-radius: 20px; }
+    .proj-counter { display: none; }
     /* Clickable images */
     .proj-slide img { cursor: zoom-in; }
     .proj-carousel:hover .proj-zoom-hint { opacity: 1; }
@@ -337,6 +337,32 @@
         </div>
       </div>
 
+      <!-- Ordly -->
+      <div class="project-card">
+        <div class="proj-carousel" data-prefix="project-images/ordly" data-icon="&#127869;">
+          <div class="proj-slides"></div>
+          <button class="proj-arrow proj-prev">&#8249;</button>
+          <button class="proj-arrow proj-next">&#8250;</button>
+          <div class="proj-dots"></div>
+          <div class="proj-counter"></div>
+        </div>
+        <div class="proj-body">
+          <div class="project-top">
+            <div class="project-icon">&#127869;</div>
+            <div class="project-date">Feb - Mar 2026</div>
+          </div>
+          <div class="project-name">Ordly - Online Ordering Platform</div>
+          <p class="project-desc">Web-based ordering platform that enables restaurants and cafes to create their own storefront, manage menus and orders, and receive customer requests online through an admin-controlled dashboard.</p>
+          <div class="project-tags">
+            <span class="tag tag-blue">Next.js</span>
+            <span class="tag tag-indigo">TypeScript</span>
+            <span class="tag tag-green">Prisma</span>
+            <span class="tag tag-cyan">PostgreSQL</span>
+            <span class="tag tag-pink">Vercel</span>
+          </div>
+        </div>
+      </div>
+
       <!-- ANN -->
       <div class="project-card">
         <div class="proj-carousel" data-prefix="project-images/ann" data-icon="&#127916;">
@@ -436,32 +462,6 @@
             <span class="tag tag-green">Firestore</span>
             <span class="tag tag-indigo">Firebase Auth</span>
             <span class="tag tag-pink">RBAC</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Ordly -->
-      <div class="project-card">
-        <div class="proj-carousel" data-prefix="project-images/ordly" data-icon="&#127869;">
-          <div class="proj-slides"></div>
-          <button class="proj-arrow proj-prev">&#8249;</button>
-          <button class="proj-arrow proj-next">&#8250;</button>
-          <div class="proj-dots"></div>
-          <div class="proj-counter"></div>
-        </div>
-        <div class="proj-body">
-          <div class="project-top">
-            <div class="project-icon">&#127869;</div>
-            <div class="project-date">2025</div>
-          </div>
-          <div class="project-name">Ordly - Online Ordering Platform</div>
-          <p class="project-desc">Web-based ordering platform that enables restaurants and cafes to create their own storefront, manage menus and orders, and receive customer requests online through an admin-controlled dashboard.</p>
-          <div class="project-tags">
-            <span class="tag tag-blue">Next.js</span>
-            <span class="tag tag-indigo">TypeScript</span>
-            <span class="tag tag-green">Prisma</span>
-            <span class="tag tag-cyan">PostgreSQL</span>
-            <span class="tag tag-pink">Vercel</span>
           </div>
         </div>
       </div>
