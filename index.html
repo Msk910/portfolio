@@ -485,11 +485,11 @@
       </div>
       <div class="skill-group">
         <div class="skill-group-title">&#128736;&#65039; Frameworks &amp; Platforms</div>
-        <div class="skill-pills"><span class="skill-pill">Laravel</span><span class="skill-pill">Flask</span><span class="skill-pill">FastAPI</span><span class="skill-pill">Flutter</span><span class="skill-pill">Firebase</span><span class="skill-pill">MySQL</span></div>
+        <div class="skill-pills"><span class="skill-pill">Laravel</span><span class="skill-pill">Flask</span><span class="skill-pill">FastAPI</span><span class="skill-pill">Flutter</span><span class="skill-pill">Firebase</span><span class="skill-pill">MySQL</span><span class="skill-pill">Chart.js</span><span class="skill-pill">DataTables</span></div>
       </div>
       <div class="skill-group">
         <div class="skill-group-title">&#9729;&#65039; Cloud &amp; DevOps</div>
-        <div class="skill-pills"><span class="skill-pill">Google Cloud Platform</span><span class="skill-pill">Cloud Run</span><span class="skill-pill">Cloud Firestore</span><span class="skill-pill">Firebase Auth</span><span class="skill-pill">GitHub</span></div>
+        <div class="skill-pills"><span class="skill-pill">Google Cloud Platform</span><span class="skill-pill">Cloud Run</span><span class="skill-pill">Firebase</span><span class="skill-pill">GitHub</span></div>
       </div>
       <div class="skill-group">
         <div class="skill-group-title">&#129302; AI &amp; Data</div>
@@ -558,7 +558,7 @@
         </span>
       </div>
       <div class="contact-deco">
-        <div class="deco-avatar">AA</div>
+        <div class="deco-avatar"><img src="profile.jpg" alt="Asaad" style="width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:top center;"></div>
         <div class="deco-city">Riyadh</div>
         <div class="deco-country">Saudi Arabia</div>
         <div class="deco-note">Open to remote &amp; on-site opportunities<br/>Internship &bull; Full-time &bull; Freelance</div>
@@ -592,8 +592,8 @@
 
   function probeImages(prefix, callback) {
     let found = [], pending = 0, checked = 0;
-    const total = MAX * EXTS.length;
-    for (let i = 1; i <= MAX; i++) {
+    const total = (MAX + 1) * EXTS.length;
+    for (let i = 0; i <= MAX; i++) {
       for (const ext of EXTS) {
         const src = prefix + '-' + i + '.' + ext;
         const img = new Image();
